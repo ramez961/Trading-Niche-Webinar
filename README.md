@@ -12,6 +12,8 @@ Arabic-first, mobile-ready funnel for a live Northhouse webinar aimed at trading
 - `privacy.html` and `terms.html`: launch drafts with owner/contact placeholders
 - `config.js`: one place for the confirmed date, GHL embeds, booking and payment links
 
+A GitHub Actions workflow in `.github/workflows/deploy.yml` publishes the static site on every push to `main`. In the repository settings, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions** to enable the first deployment.
+
 This is a static GitHub Pages site. It does not store submissions itself. The registration and application slots become live after the approved GoHighLevel form embed URLs are added to `config.js`.
 
 ## Before launch
