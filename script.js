@@ -82,4 +82,33 @@
 
   setExternalLink("[data-booking-link]", config.bookingUrl, "رابط الحجز سيضاف بعد اعتماده");
   setExternalLink("[data-payment-link]", config.paymentUrl, "رابط الدفع سيضاف بعد اعتماد العرض");
+
+  const mobileCta = document.querySelector("[data-mobile-cta]");
+  const hero = document.querySelector(".hero");
+  const registration = document.querySelector("#register");
+  if (mobileCta && hero && registration && "IntersectionObserver" in window) {
+    const isMobile = window.matchMedia("(max-width: 680px)");
+    let heroVisible = true;
+    let registrationVisible = false;
+
+    const updateMobileCta = () => {
+      const visible = isMobile.matches && !heroVisible && !registrationVisible;
+      mobileCta.classList.toggle("is-visible", visible);
+      mobileCta.setAttribute("aria-hidden", String(!visible));
+      mobileCta.tabIndex = visible ? 0 : -1;
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.target === hero) heroVisible = entry.isIntersecting;
+        if (entry.target === registration) registrationVisible = entry.isIntersecting;
+      });
+      updateMobileCta();
+    }, { threshold: 0.01 });
+
+    observer.observe(hero);
+    observer.observe(registration);
+    isMobile.addEventListener("change", updateMobileCta);
+    updateMobileCta();
+  }
 })();
