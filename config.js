@@ -4,9 +4,12 @@ window.WEBINAR_CONFIG = {
   eventStartISO: "",
   timeZone: "Asia/Riyadh",
   presenterName: "فريق Northhouse",
+  // Paste the approved YouTube watch, youtu.be, or Shorts URL here when ready.
+  vslVideoUrl: "",
   registrationEmbedUrl: "",
   applicationEmbedUrl: "",
   bookingUrl: "",
   paymentUrl: "",
   privacyEmail: ""
 };
+
