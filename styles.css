@@ -30,7 +30,7 @@ html[data-palette="green"] {
   --white: #FFFFFF; --paper: #F1F6F2; --line: #CBD9CE; --lime: #45A96B; --ink: #1E3025; --ink-2: #1E3025; --forest: #1E3025; --forest-2: #1E3025; --lime-dark: #286A41; --muted: #53665A;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; overflow-x: clip; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
 button, input, select { font: inherit; }
