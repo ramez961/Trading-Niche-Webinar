@@ -401,7 +401,11 @@
   "نموذج طلب الشراكة": "Partnership application form",
   "صفحات الموقع": "Site pages",
   "التنقل الرئيسي": "Main navigation",
-  "Northouse — الرئيسية": "Northouse — Home"
+  "Northouse — الرئيسية": "Northouse — Home",
+    "جلسة تعريفية مباشرة لصناع المحتوى والخبراء في مجال التداول في السعودية. تعرّف على نموذج شراكة Northouse والخطوات التالية.": "A live introductory webinar for content creators and experts in trading in Saudi Arabia. Learn about Northouse’s partnership model and next steps.",
+    "تعرّف على نموذج الشراكة والخطوة التالية المناسبة لخبرتك وجمهورك.": "Learn about the partnership model and the next step that fits your experience and audience.",
+    "تصميم توضيحي لحركة السوق وخطوات بناء شراكة": "Illustration of market movement and partnership-building steps",
+    "رسم توضيحي لحركة السوق": "Illustrative market chart"
 };
   const englishToArabic = Object.fromEntries(Object.entries(translations).map(([ar,en])=>[en,ar]));
   const languageToggle = document.querySelector("[data-language-toggle]");
