@@ -14,6 +14,18 @@
   --radius: 18px;
   --shadow: 0 18px 60px rgba(0, 0, 0, .12);
 }
+html[data-palette="graphite"] {
+  --white: #F8F5EF;
+  --paper: #EEEAE2;
+  --line: #D8D0C3;
+  --lime: #C7A76C;
+  --ink: #24272A;
+  --ink-2: #24272A;
+  --forest: #181B1F;
+  --forest-2: #181B1F;
+  --lime-dark: #876B3E;
+  --muted: #625E57;
+}
 html[data-palette="snowfall"] {
   --white: #FFFFFF; --paper: #EEF1F5; --line: #CFD6DF; --lime: #FF2BD6; --ink: #101826; --ink-2: #101826; --forest: #101826; --forest-2: #101826; --lime-dark: #FF2BD6; --muted: #697586;
 }
@@ -306,6 +318,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .swatch-porcelain { background: linear-gradient(90deg, #FDFEFE 0 34%, #B7D3E8 34% 65%, #4B87B3 65%); }
 .swatch-cotton { background: linear-gradient(90deg, #FFFFFF 0 34%, #DCDCEC 34% 65%, #7A7AA3 65%); }
 .swatch-green { background: linear-gradient(90deg, #FFFFFF 0 34%, #CBD9CE 34% 65%, #45A96B 65%); }
+.swatch-graphite { background: linear-gradient(90deg, #F8F5EF 0 34%, #D8D0C3 34% 65%, #C7A76C 65%); }
 @media (max-width: 680px) {
   .theme-toggle { min-height: 40px; padding-inline: 9px; font-size: 10px; }
   .palette-options { inset-inline-end: -80px; width: min(230px, calc(100vw - 34px)); }

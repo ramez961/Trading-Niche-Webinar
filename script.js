@@ -195,7 +195,7 @@
     updateMobileCta();
   }
 
-  const paletteKeys = new Set(["snowfall", "winter", "porcelain", "cotton", "green"]);
+  const paletteKeys = new Set(["snowfall", "winter", "porcelain", "cotton", "green", "graphite"]);
   const paletteChoices = [...document.querySelectorAll("[data-palette-choice]")];
   const paletteToggle = document.querySelector(".theme-toggle");
   const palettePanel = document.querySelector("#palette-options");
@@ -213,7 +213,8 @@
         winter: "#1E2A33",
         porcelain: "#1B2A38",
         cotton: "#26263A",
-        green: "#1E3025"
+        green: "#1E3025",
+        graphite: "#181B1F"
       })[palette];
     }
     try {
