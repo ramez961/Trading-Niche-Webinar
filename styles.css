@@ -1,14 +1,14 @@
 :root {
   color-scheme: light;
-  --ink: var(--ink);
-  --ink-2: var(--ink);
-  --forest: var(--ink);
-  --forest-2: var(--ink);
-  --lime: #FF2BD6;
-  --lime-dark: #FF2BD6;
+  --ink: #101826;
+  --ink-2: #101826;
+  --forest: #101826;
+  --forest-2: #101826;
+  --lime: var(--lime);
+  --lime-dark: var(--lime);
   --paper: #EEF1F5;
   --white: var(--white);
-  --muted: var(--muted);
+  --muted: #697586;
   --line: #CFD6DF;
   --font: "Tajawal", Tahoma, Arial, sans-serif;
   --radius: 18px;
