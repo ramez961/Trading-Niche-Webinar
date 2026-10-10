@@ -4,10 +4,10 @@
   --ink-2: #101826;
   --forest: #101826;
   --forest-2: #101826;
-  --lime: var(--lime);
-  --lime-dark: var(--lime);
+  --lime: #FF2BD6;
+  --lime-dark: #FF2BD6;
   --paper: #EEF1F5;
-  --white: var(--white);
+  --white: #FFFFFF;
   --muted: #697586;
   --line: #CFD6DF;
   --font: "Tajawal", Tahoma, Arial, sans-serif;
@@ -29,13 +29,12 @@ html[data-palette="cotton"] {
 html[data-palette="green"] {
   --white: #FFFFFF; --paper: #F1F6F2; --line: #CBD9CE; --lime: #45A96B; --ink: #1E3025; --ink-2: #1E3025; --forest: #1E3025; --forest-2: #1E3025; --lime-dark: #45A96B; --muted: #62766A;
 }
-}
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
 button, input, select { font: inherit; }
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #FF2BD6; outline-offset: 4px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--lime); outline-offset: 4px; }
 .container { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
 .site-header { position: absolute; z-index: 5; inset: 0 0 auto; color: #FFFFFF; }
 .header-inner { min-height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 28px; border-bottom: 1px solid rgba(255,255,255,.12); }
