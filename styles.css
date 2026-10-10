@@ -362,3 +362,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .market-chart { height: 108px; }
   .market-path span { font-size: 7px; }
 }
+
+/* Shared page navigation, including team preview pages */
+.page-menu { position: relative; flex: 0 0 auto; }
+.page-menu summary { display: flex; align-items: center; min-height: 42px; padding: 0 13px; border: 1px solid rgba(255,255,255,.3); border-radius: 8px; color: var(--white); font-size: 11px; font-weight: 700; cursor: pointer; list-style: none; }
+.page-menu summary::-webkit-details-marker { display: none; }
+.page-menu summary::after { content: "⌄"; margin-inline-start: 8px; color: var(--lime); }
+.page-menu[open] summary, .page-menu summary:hover { border-color: var(--lime); }
+.page-menu nav { position: absolute; z-index: 35; top: calc(100% + 10px); inset-inline-end: 0; display: grid; gap: 3px; width: 220px; padding: 8px; border: 1px solid rgba(255,255,255,.14); border-radius: 12px; background: var(--forest); box-shadow: 0 14px 40px rgba(0,0,0,.32); }
+.page-menu nav a { display: flex; align-items: center; min-height: 40px; padding: 6px 10px; border-radius: 7px; color: var(--white); font-size: 12px; text-decoration: none; }
+.page-menu nav a:hover, .page-menu nav a:focus-visible { background: rgba(255,255,255,.1); color: var(--lime); }
+.page-menu summary:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+@media (max-width: 680px) {
+  .page-menu summary { min-height: 40px; padding-inline: 9px; font-size: 10px; }
+  .page-menu summary::after { margin-inline-start: 4px; }
+  .page-menu nav { width: min(220px, calc(100vw - 34px)); }
+  .subpage-header .header-inner { gap: 8px; }
+}
