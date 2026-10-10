@@ -12,7 +12,8 @@
   --line: #CFD6DF;
   --font: "Tajawal", Tahoma, Arial, sans-serif;
   --radius: 18px;
-  --shadow: 0 18px 60px rgba(0, 0, 0, .12);\n  --page-bg: #101826;
+  --shadow: 0 18px 60px rgba(0, 0, 0, .12);
+  --page-bg: #101826;
 }
 html[data-palette="snowfall"] {
   --white: #FFFFFF; --paper: #EEF1F5; --line: #CFD6DF; --lime: #FF2BD6; --ink: #101826; --ink-2: #101826; --forest: #101826; --forest-2: #101826; --lime-dark: #FF2BD6; --muted: #697586; --page-bg: #101826;
