@@ -13,9 +13,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261010-bilingual">
+  <link rel="stylesheet" href="styles.css?v=20261010-bilingual-ai-1">
   <script src="config.js" defer></script>
-  <script src="script.js?v=20261010-bilingual-final" defer></script>
+  <script src="script.js?v=20261010-bilingual-ai-1" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -253,6 +253,14 @@
       <small>© <span data-year></span> Northouse</small>
     </div>
   </footer>
+  <aside class="ai-chat-widget" aria-label="مساعد Northouse">
+    <button class="ai-chat-toggle" type="button" data-ai-chat-toggle aria-expanded="false" aria-controls="ai-chat-panel"><span aria-hidden="true">✦</span> اسأل مساعد الذكاء الاصطناعي</button>
+    <section class="ai-chat-panel" id="ai-chat-panel" hidden>
+      <div class="ai-chat-panel-head"><strong>مساعد Northouse</strong><button type="button" data-ai-chat-close aria-label="إغلاق">×</button></div>
+      <p data-ai-chat-status>لم يتم ربط مساعد الذكاء الاصطناعي بعد.</p>
+      <a data-ai-chat-link hidden target="_blank" rel="noopener noreferrer">ابدأ المحادثة</a>
+    </section>
+  </aside>
 </body>
 </html>
 
