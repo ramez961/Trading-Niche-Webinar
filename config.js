@@ -6,6 +6,7 @@ window.WEBINAR_CONFIG = {
   presenterName: "فريق Northouse",
   // Paste the approved YouTube watch, youtu.be, or Shorts URL here when ready.
   vslVideoUrl: "",
+  // Configure matching hidden GHL fields and query keys for the four UTM parameters.
   registrationEmbedUrl: "",
   applicationEmbedUrl: "",
   bookingUrl: "",

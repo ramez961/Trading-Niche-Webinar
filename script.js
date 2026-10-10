@@ -2,6 +2,29 @@
   "use strict";
 
   const config = window.WEBINAR_CONFIG || {};
+  const utmKeys = ["utm_source", "utm_campaign", "utm_content", "utm_term"];
+  const registrationUtms = (() => {
+    const values = {};
+    try {
+      const saved = JSON.parse(sessionStorage.getItem("northouse-registration-utms") || "{}");
+      utmKeys.forEach((key) => {
+        if (typeof saved[key] === "string" && saved[key]) values[key] = saved[key];
+      });
+      const current = new URLSearchParams(window.location.search);
+      utmKeys.forEach((key) => {
+        const value = current.get(key);
+        if (value) values[key] = value.slice(0, 500);
+      });
+      sessionStorage.setItem("northouse-registration-utms", JSON.stringify(values));
+    } catch {
+      const current = new URLSearchParams(window.location.search);
+      utmKeys.forEach((key) => {
+        const value = current.get(key);
+        if (value) values[key] = value.slice(0, 500);
+      });
+    }
+    return values;
+  })();
   document.querySelectorAll("[data-year]").forEach((node) => {
     node.textContent = String(new Date().getFullYear());
   });
@@ -92,6 +115,12 @@
       return;
     }
     if (url.protocol !== "https:" || !embedHosts.has(url.hostname)) return;
+
+    if (slotName === "registration") {
+      utmKeys.forEach((key) => {
+        if (registrationUtms[key]) url.searchParams.set(key, registrationUtms[key]);
+      });
+    }
 
     const frame = document.createElement("iframe");
     frame.className = "embed-frame";
