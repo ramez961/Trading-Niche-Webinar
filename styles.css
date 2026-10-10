@@ -299,11 +299,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .palette-heading { padding: 3px 7px 8px; color: rgba(255,255,255,.62); font-size: 10px; }
 .palette-options button { display: flex; align-items: center; gap: 10px; min-height: 38px; padding: 5px 8px; border: 1px solid transparent; border-radius: 7px; background: transparent; color: inherit; text-align: start; font-size: 11px; cursor: pointer; }
 .palette-options button:hover, .palette-options button[aria-pressed="true"] { border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.08); }
-.swatch { width: 28px; height: 20px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.3); border-radius: 5px; background: linear-gradient(90deg, var(--white) 0 34%, var(--line) 34% 65%, var(--lime) 65%); }
-.swatch-winter { background: linear-gradient(90deg, var(--white) 0 34%, #C9D3DC 34% 65%, #FFB347 65%); }
+.swatch { width: 28px; height: 20px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.3); border-radius: 5px; background: linear-gradient(90deg, #FFFFFF 0 34%, #CFD6DF 34% 65%, #FF2BD6 65%); }
+.swatch-winter { background: linear-gradient(90deg, #FFFFFF 0 34%, #C9D3DC 34% 65%, #FFB347 65%); }
 .swatch-porcelain { background: linear-gradient(90deg, #FDFEFE 0 34%, #B7D3E8 34% 65%, #4B87B3 65%); }
-.swatch-cotton { background: linear-gradient(90deg, var(--white) 0 34%, #DCDCEC 34% 65%, #7A7AA3 65%); }
-.swatch-green { background: linear-gradient(90deg, var(--white) 0 34%, #CBD9CE 34% 65%, #45A96B 65%); }
+.swatch-cotton { background: linear-gradient(90deg, #FFFFFF 0 34%, #DCDCEC 34% 65%, #7A7AA3 65%); }
+.swatch-green { background: linear-gradient(90deg, #FFFFFF 0 34%, #CBD9CE 34% 65%, #45A96B 65%); }
 @media (max-width: 680px) {
   .theme-toggle { min-height: 40px; padding-inline: 9px; font-size: 10px; }
   .palette-options { inset-inline-end: -80px; width: min(230px, calc(100vw - 34px)); }
