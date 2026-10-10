@@ -685,3 +685,23 @@ html[lang="en"] .main-nav { direction: ltr; }
   .registration-section::before,
   #about { background-image: none; }
 }
+
+
+/* Carry the market-grid texture onto every follow-up page. */
+.subpage-main {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--lime-dark) 2.4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--lime-dark) 2.4%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+@media (max-width: 680px) {
+  .subpage-main {
+    background-size: 52px 52px;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--lime-dark) 1.8%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--lime-dark) 1.8%, transparent) 1px, transparent 1px);
+  }
+}
+@media (prefers-reduced-data: reduce) {
+  .subpage-main { background-image: none; }
+}
