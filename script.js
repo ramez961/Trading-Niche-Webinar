@@ -413,24 +413,33 @@
     "اضغط بدء المحادثة لفتح المساعد.": "Select Start chat to open the assistant.",
     "ابدأ المحادثة": "Start chat"
 };
-  const englishToArabic = Object.fromEntries(Object.entries(translations).map(([ar,en])=>[en,ar]));
   const languageToggle = document.querySelector("[data-language-toggle]");
+  const originalTextNodes = new WeakMap();
+  const originalAttributes = new WeakMap();
+  const originalDocumentTitle = document.title;
   let currentLanguage = "ar";
-  const swapText = (value, language) => {
+  const translateArabic = (value) => {
     const trimmed = value.trim();
-    const translated = language === "en" ? translations[trimmed] : englishToArabic[trimmed];
+    const translated = translations[trimmed];
     return translated ? value.replace(trimmed, translated) : value;
   };
   const applyLanguage = (language) => {
     currentLanguage = language === "en" ? "en" : "ar";
     document.documentElement.lang = currentLanguage;
     document.documentElement.dir = currentLanguage === "en" ? "ltr" : "rtl";
-    document.title = swapText(document.title,currentLanguage);
+    document.title = currentLanguage === "en" ? translateArabic(originalDocumentTitle) : originalDocumentTitle;
     const walker = document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
     let node;
-    while((node=walker.nextNode())) node.nodeValue=swapText(node.nodeValue,currentLanguage);
-    document.querySelectorAll("[aria-label], [title]").forEach((el)=>["aria-label","title"].forEach((a)=>{const v=el.getAttribute(a);if(v)el.setAttribute(a,swapText(v,currentLanguage));}));
-    document.querySelectorAll('meta[name="description"],meta[property="og:title"],meta[property="og:description"]').forEach((el)=>{const v=el.getAttribute("content");if(v)el.setAttribute("content",swapText(v,currentLanguage));});
+    while((node=walker.nextNode())) {\n      if(!originalTextNodes.has(node)) originalTextNodes.set(node,node.nodeValue);\n      const original=originalTextNodes.get(node);\n      node.nodeValue=currentLanguage==="en"?translateArabic(original):original;\n    }
+    document.querySelectorAll("[aria-label], [title]").forEach((el)=>{
+      let originals=originalAttributes.get(el);if(!originals){originals={};originalAttributes.set(el,originals);}
+      ["aria-label","title"].forEach((a)=>{const v=el.getAttribute(a);if(v&&!Object.hasOwn(originals,a))originals[a]=v;if(originals[a])el.setAttribute(a,currentLanguage==="en"?translateArabic(originals[a]):originals[a]);});
+    });
+    document.querySelectorAll('meta[name="description"],meta[property="og:title"],meta[property="og:description"]').forEach((el)=>{
+      let originals=originalAttributes.get(el);if(!originals){originals={};originalAttributes.set(el,originals);}
+      const v=el.getAttribute("content");if(v&&!Object.hasOwn(originals,"content"))originals.content=v;
+      if(originals.content)el.setAttribute("content",currentLanguage==="en"?translateArabic(originals.content):originals.content);
+    });
     if(config.eventStartISO){const d=new Date(config.eventStartISO);if(!Number.isNaN(d.getTime())){const date=new Intl.DateTimeFormat(currentLanguage==="en"?"en-SA":"ar-SA",{dateStyle:"full",timeStyle:"short",timeZone:config.timeZone||"Asia/Riyadh"}).format(d);document.querySelectorAll("[data-event-date]").forEach((el)=>el.textContent=date);}}
     if(languageToggle){languageToggle.textContent=currentLanguage==="en"?"AR":"EN";languageToggle.setAttribute("aria-label",currentLanguage==="en"?"Switch to Arabic":"Switch to English");}
     try{localStorage.setItem("northouse-language",currentLanguage);}catch{}
