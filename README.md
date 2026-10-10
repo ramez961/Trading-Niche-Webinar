@@ -1,34 +1,52 @@
-# Trading Niche Webinar
+# Northouse Trading Webinar Website
 
-Arabic-first, mobile-ready funnel for a live Northouse webinar aimed at trading creators and experts in Saudi Arabia.
+This website introduces Northouse’s partnership model to trading content creators, industry experts, and community leaders in Saudi Arabia. Its goal is to explain the opportunity clearly and help interested visitors take the next step with the Northouse team.
 
-## Included
+The webinar is an introductory conversation about a potential partnership. It is not investment advice, trading signals, or a promise of income or returns.
 
-- `index.html`: webinar landing page, lazy-loaded VSL slot and registration embed slot
-- `thanks.html`: registration confirmation destination
-- `application.html`: post-webinar application page
-- `booking.html`: qualified-prospect call booking handoff
-- `payment.html`: offer/payment handoff
-- `privacy.html` and `terms.html`: launch drafts with owner/contact placeholders
-- `config.js`: one place for the confirmed date, GHL embeds, booking and payment links
+## What visitors can do
 
-A GitHub Actions workflow in `.github/workflows/deploy.yml` publishes the static site on every push to `main`. In the repository settings, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions** to enable the first deployment.
+- Learn what the webinar covers and who it is for.
+- Watch the introductory video when its link is added.
+- Register their interest once the registration form is connected.
+- Read the privacy policy and terms.
+- Switch between Arabic and English.
+- Browse the available page designs and color palettes using the review controls.
 
-This is a static GitHub Pages site. It does not store submissions itself. The registration and application slots become live after the approved GoHighLevel form embed URLs are added to `config.js`.
+The floating Northouse AI assistant button is currently a setup placeholder. It can open a chat link after an approved assistant service is configured.
+
+## Pages and visitor journey
+
+The site has seven pages:
+
+- `index.html` — webinar overview, video, registration area, and FAQs.
+- `thanks.html` — confirmation after registration.
+- `application.html` — application step for interested attendees.
+- `booking.html` — handoff to book a conversation with the team.
+- `payment.html` — payment handoff, when offer details are finalized.
+- `privacy.html` and `terms.html` — privacy information and terms.
+
+The intended flow is: learn about the webinar → register interest → receive follow-up → apply after the webinar → book a conversation → review the offer and payment details with the team.
+
+## Current setup
+
+This is a static website published with GitHub Pages. It does not collect or store submissions by itself. The video, forms, booking, payment, event date, and privacy contact are not configured yet. The site becomes ready to accept registrations after the team adds and verifies the approved service links.
+
+Settings for those links and event details are in `config.js`. Do not add private keys or secrets to this file.
 
 ## Before launch
 
-1. Confirm the final webinar date, time, timezone, presenter, offer, eligibility and agenda with the team.
-2. Paste the approved YouTube VSL URL into `vslVideoUrl` in `config.js`. The site accepts standard YouTube watch, youtu.be, Shorts and live URLs, and uses YouTube's privacy-enhanced embed with lazy loading.
-3. Add the GHL registration and application form embed URLs to `config.js`. Confirm the forms write to the correct CRM pipeline and send the approved consent/reminder sequence.
-4. Set the registration form's success redirect to the published `thanks.html` URL.
-5. Add the post-webinar application link in follow-up messages; the thank-you page also links to `application.html` for attendees.
-6. Set the application form's success redirect in GoHighLevel to the published `booking.html` URL. The embedded form cannot be redirected by this static site on its own.
-7. Add the approved booking URL in `config.js`; the booking page links onward to the local `payment.html` page only for prospects who have reviewed the offer with the team. Add the approved payment URL only after offer terms are finalized.
-8. Replace the privacy and terms placeholders with the responsible entity's approved details and contact address.
-9. Add approved brand assets and presenter information.
-10. Configure ad pixels/analytics only after the team provides the correct IDs and consent requirements.
-11. Review the full flow on mobile and desktop, submit a real test lead, verify CRM attribution/reminders, and test booking/payment in their respective sandbox or test modes.
+1. Confirm the date, time, presenter, webinar content, eligibility, and partnership terms.
+2. Add the approved YouTube video URL in `vslVideoUrl`.
+3. Add the GoHighLevel registration and application form embed URLs, and confirm their CRM and consent settings.
+4. Set the registration form’s success redirect to the published `thanks.html` page.
+5. Configure application follow-up and redirect successful applicants to `booking.html`.
+6. Add the approved booking and payment URLs only after the team finalizes the offer.
+7. Replace privacy and terms placeholders with approved company details and contact information.
+8. Test the full visitor journey on desktop and mobile, including a test submission and the CRM follow-up.
 
-No fake countdown, scarcity, testimonials, outcomes, or investment-return claims are used. The webinar is presented as an introduction to the partnership model, not financial or investment advice.
+The site avoids fabricated countdowns, scarcity, testimonials, outcomes, and investment-return claims.
 
+## Publishing
+
+A GitHub Actions workflow in `.github/workflows/deploy.yml` publishes the site when changes are pushed to `main`. GitHub Pages must be configured to use **GitHub Actions** as its build and deployment source.
