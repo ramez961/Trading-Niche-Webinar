@@ -304,6 +304,7 @@
   "وسنشاركك التفاصيل": "and we’ll share the details",
   "بعد تأكيد الموعد وربط نموذج التسجيل، ستتمكن من إرسال بياناتك واستلام معلومات الحضور والتذكيرات.": "Once the date is confirmed and the registration form is connected, you’ll be able to submit your details and receive attendance information and reminders.",
   "المنطقة الزمنية": "Time zone",
+    "الموعد": "Date",
   "توقيت الرياض (UTC+3)": "Riyadh time (UTC+3)",
   "اللغة": "Language",
   "تحدد مع تفاصيل الجلسة": "To be confirmed with the webinar details",
