@@ -1,6 +1,6 @@
 # Trading Niche Webinar
 
-Arabic-first, mobile-ready funnel for a live Northhouse webinar aimed at trading creators and experts in Saudi Arabia.
+Arabic-first, mobile-ready funnel for a live Northouse webinar aimed at trading creators and experts in Saudi Arabia.
 
 ## Included
 
