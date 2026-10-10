@@ -475,7 +475,7 @@ html[lang="en"] .main-nav { direction: ltr; }
 
 
 /* Subtle orbital motif carried through the landing and follow-up pages */
-.vsl-section, .section-light, .closing-cta, .subpage-main { position: relative; isolation: isolate; }
+.vsl-section, .section-light, .closing-cta, .subpage-main { position: relative; isolation: isolate; overflow-x: clip; }
 .vsl-section::before, .section-light::before, .closing-cta::before, .subpage-main::before {
   content: "";
   position: absolute;
