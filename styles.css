@@ -930,3 +930,6 @@ html[lang="en"] .main-nav { direction: ltr; }
   .vsl-placeholder-content .vsl-play { width: 56px; height: 56px; }
   .vsl-placeholder-content p { font-size: 12px; }
 }
+
+.vsl-placeholder[role="button"] { cursor: pointer; }
+.vsl-placeholder[role="button"]:focus-visible { outline: 3px solid var(--lime); outline-offset: -3px; }

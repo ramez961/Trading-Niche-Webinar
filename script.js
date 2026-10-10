@@ -50,7 +50,8 @@
 
   const mountVsl = (videoUrl) => {
     const slot = document.querySelector("[data-vsl-slot]");
-    if (!slot || !videoUrl) return;
+    const placeholder = slot?.querySelector(".vsl-placeholder");
+    if (!slot || !placeholder || !videoUrl) return;
 
     let url;
     try {
@@ -68,36 +69,34 @@
       : url.searchParams.get("v") || (["embed", "shorts", "live"].includes(pathParts[0]) ? pathParts[1] : "");
     if (!videoId || !/^[A-Za-z0-9_-]{11}$/.test(videoId)) return;
 
-    const frame = document.createElement("iframe");
-    frame.className = "vsl-frame";
-    frame.title = "الفيديو التعريفي لجلسة Northhouse";
-    frame.loading = "lazy";
-    frame.referrerPolicy = "strict-origin-when-cross-origin";
-    frame.allow = "accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share";
-    frame.allowFullscreen = true;
-    const embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId + "?rel=0&playsinline=1";
+    const prompt = placeholder.querySelector(".vsl-placeholder-content p");
+    if (prompt) prompt.textContent = "اضغط لتشغيل الفيديو";
+    placeholder.setAttribute("role", "button");
+    placeholder.setAttribute("tabindex", "0");
+    placeholder.setAttribute("aria-label", "اضغط لتشغيل الفيديو");
 
-    const loadFrame = () => {
-      if (frame.src) return;
-      frame.src = embedUrl;
+    const playVideo = () => {
+      if (slot.querySelector(".vsl-frame")) return;
+      const frame = document.createElement("iframe");
+      frame.className = "vsl-frame";
+      frame.title = "الفيديو التعريفي لجلسة Northouse";
+      frame.referrerPolicy = "strict-origin-when-cross-origin";
+      frame.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share";
+      frame.allowFullscreen = true;
+      frame.src = "https://www.youtube-nocookie.com/embed/" + videoId + "?autoplay=1&rel=0&playsinline=1";
       slot.replaceChildren(frame);
     };
 
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          observer.disconnect();
-          loadFrame();
-        }
-      }, { rootMargin: "240px" });
-      observer.observe(slot);
-    } else {
-      loadFrame();
-    }
+    placeholder.addEventListener("click", playVideo);
+    placeholder.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        playVideo();
+      }
+    });
   };
 
   mountVsl(config.vslVideoUrl);
-
   const embedHosts = new Set([
     "api.leadconnectorhq.com",
     "link.msgsndr.com",
@@ -294,7 +293,7 @@
   "قبل التسجيل": "Before you register",
   "شاهد الفيديو التعريفي": "Watch the introduction",
   "خذ فكرة أوضح عن الجلسة ونموذج الشراكة قبل أن تقرر إن كان التسجيل مناسبًا لك.": "Get a clearer picture of the webinar and partnership model before deciding whether to register.",
-  "سيظهر الفيديو هنا بعد إضافة رابط VSL في ملف الإعدادات.": "The video will appear here once the VSL link is added to the configuration file.",
+  "اضغط لتشغيل الفيديو": "Click to play the video.",
   "فيديو تعريفي · Northouse": "Northouse introductory video",
   "من محتوى التداول": "From trading content",
   "إلى": "to",
