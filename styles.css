@@ -385,3 +385,5 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* Palette main color for the confirmation label */
 .subpage-card .eyebrow-main { color: var(--lime); }
+
+.subpage-note.note-main { border-inline-start-color: var(--lime); }
