@@ -3,7 +3,7 @@ window.WEBINAR_CONFIG = {
   eventDateLabel: "التاريخ والوقت يعلنان قريبًا",
   eventStartISO: "",
   timeZone: "Asia/Riyadh",
-  presenterName: "فريق Northhouse",
+  presenterName: "فريق Northouse",
   // Paste the approved YouTube watch, youtu.be, or Shorts URL here when ready.
   vslVideoUrl: "",
   registrationEmbedUrl: "",
