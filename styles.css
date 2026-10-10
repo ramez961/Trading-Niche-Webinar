@@ -387,3 +387,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .subpage-card .eyebrow-main { color: var(--lime); }
 
 .subpage-note.note-main { border-inline-start-color: var(--lime); }
+
+
+/* Shared bilingual header controls */
+html[lang="en"] { --font: "Manrope", Arial, sans-serif; }
+.header-inner { direction: rtl; }
+.header-tools { display: flex; align-items: center; gap: 10px; direction: rtl; flex: 0 0 auto; }
+.language-toggle { min-height: 42px; min-width: 48px; padding: 0 12px; border: 1px solid rgba(255,255,255,.3); border-radius: 8px; background: transparent; color: var(--white); font: 700 11px/1 Manrope, sans-serif; cursor: pointer; transition: border-color .18s, color .18s, background .18s; }
+.language-toggle:hover, .language-toggle:focus-visible { border-color: var(--lime); color: var(--lime); }
+html[lang="en"] .main-nav { direction: ltr; }
+@media (max-width: 680px) {
+  .header-tools { gap: 5px; }
+  .language-toggle { min-height: 40px; min-width: 38px; padding-inline: 7px; font-size: 10px; }
+  .site-header .header-inner > .button { display: none; }
+}
+@media (max-width: 360px) {
+  .theme-toggle { padding-inline: 5px; font-size: 9px; }
+  .page-menu summary { padding-inline: 6px; font-size: 9px; }
+}
