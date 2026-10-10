@@ -165,5 +165,61 @@
     isMobile.addEventListener("change", updateMobileCta);
     updateMobileCta();
   }
+
+  const paletteKeys = new Set(["snowfall", "winter", "porcelain", "cotton", "green"]);
+  const paletteChoices = [...document.querySelectorAll("[data-palette-choice]")];
+  const paletteToggle = document.querySelector(".theme-toggle");
+  const palettePanel = document.querySelector("#palette-options");
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+
+  const applyPalette = (name) => {
+    const palette = paletteKeys.has(name) ? name : "snowfall";
+    document.documentElement.dataset.palette = palette;
+    paletteChoices.forEach((choice) => {
+      choice.setAttribute("aria-pressed", String(choice.dataset.paletteChoice === palette));
+    });
+    if (themeColor) {
+      themeColor.content = ({
+        snowfall: "#101826",
+        winter: "#1E2A33",
+        porcelain: "#1B2A38",
+        cotton: "#26263A",
+        green: "#1E3025"
+      })[palette];
+    }
+    try {
+      localStorage.setItem("northouse-palette", palette);
+    } catch {}
+  };
+
+  let savedPalette = "snowfall";
+  try {
+    savedPalette = localStorage.getItem("northouse-palette") || savedPalette;
+  } catch {}
+  applyPalette(savedPalette);
+
+  if (paletteToggle && palettePanel) {
+    paletteToggle.addEventListener("click", () => {
+      const open = paletteToggle.getAttribute("aria-expanded") !== "true";
+      paletteToggle.setAttribute("aria-expanded", String(open));
+      palettePanel.hidden = !open;
+    });
+    paletteChoices.forEach((choice) => {
+      choice.addEventListener("click", () => applyPalette(choice.dataset.paletteChoice));
+    });
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".theme-picker")) {
+        paletteToggle.setAttribute("aria-expanded", "false");
+        palettePanel.hidden = true;
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        paletteToggle.setAttribute("aria-expanded", "false");
+        palettePanel.hidden = true;
+        paletteToggle.focus();
+      }
+    });
+  }
 })();
 
