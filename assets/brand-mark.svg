@@ -1,5 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="Northhouse">
-  <rect width="80" height="80" rx="20" fill="#c8f56a"/>
-  <path d="M17 61V19h10l26 27V19h10v42H53L27 34v27z" fill="#081411"/>
-  <circle cx="63" cy="61" r="5" fill="#426d20"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="Northouse">
+  <rect x="5" y="5" width="70" height="70" rx="16" fill="#fff"/>
+  <text x="40" y="59" fill="#171717" font-family="Georgia, 'Times New Roman', serif" font-size="48" text-anchor="middle">N</text>
 </svg>
