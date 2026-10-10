@@ -411,7 +411,9 @@
     "إغلاق": "Close",
     "لم يتم ربط مساعد الذكاء الاصطناعي بعد.": "The AI assistant is not connected yet.",
     "اضغط بدء المحادثة لفتح المساعد.": "Select Start chat to open the assistant.",
-    "ابدأ المحادثة": "Start chat"
+    "ابدأ المحادثة": "Start chat",
+    "إخفاء المساعد على الجانب": "Hide assistant to the side",
+    "إظهار مساعد الذكاء الاصطناعي": "Show the AI assistant"
 };
   const languageToggle = document.querySelector("[data-language-toggle]");
   const originalTextNodes = new WeakMap();
@@ -448,9 +450,11 @@
     if(languageToggle){languageToggle.textContent=currentLanguage==="en"?"AR":"EN";languageToggle.setAttribute("aria-label",currentLanguage==="en"?"Switch to Arabic":"Switch to English");}
     try{localStorage.setItem("northouse-language",currentLanguage);}catch{}
   };
+  const aiChatWidget = document.querySelector(".ai-chat-widget");
   const aiChatToggle = document.querySelector("[data-ai-chat-toggle]");
   const aiChatPanel = document.querySelector("#ai-chat-panel");
   const aiChatClose = document.querySelector("[data-ai-chat-close]");
+  const aiChatDock = document.querySelector("[data-ai-chat-dock]");
   const aiChatStatus = document.querySelector("[data-ai-chat-status]");
   const aiChatLink = document.querySelector("[data-ai-chat-link]");
   try {
@@ -465,14 +469,38 @@
     if (aiChatPanel) aiChatPanel.hidden = true;
     if (aiChatToggle) aiChatToggle.setAttribute("aria-expanded", "false");
   };
+  const setAiChatDocked = (docked) => {
+    if (!aiChatWidget) return;
+    aiChatWidget.classList.toggle("is-docked", docked);
+    if (docked) closeAiChat();
+    if (aiChatToggle) {
+      if (docked) {
+        aiChatToggle.setAttribute("aria-label", currentLanguage === "en" ? "Show the AI assistant" : "إظهار مساعد الذكاء الاصطناعي");
+      } else {
+        aiChatToggle.removeAttribute("aria-label");
+      }
+    }
+    try { localStorage.setItem("northouse-ai-chat-docked", String(docked)); } catch {}
+  };
   if (aiChatToggle && aiChatPanel) {
     aiChatToggle.addEventListener("click", () => {
+      const docked = aiChatWidget?.classList.contains("is-docked");
+      if (docked) {
+        setAiChatDocked(false);
+        aiChatPanel.hidden = false;
+        aiChatToggle.setAttribute("aria-expanded", "true");
+        return;
+      }
       aiChatPanel.hidden = !aiChatPanel.hidden;
       aiChatToggle.setAttribute("aria-expanded", String(!aiChatPanel.hidden));
     });
     if (aiChatClose) aiChatClose.addEventListener("click", closeAiChat);
+    if (aiChatDock) aiChatDock.addEventListener("click", () => setAiChatDocked(true));
     document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeAiChat(); });
   }
+  let assistantDocked = false;
+  try { assistantDocked = localStorage.getItem("northouse-ai-chat-docked") === "true"; } catch {}
+  setAiChatDocked(assistantDocked);
 
   let savedLanguage="ar";try{savedLanguage=localStorage.getItem("northouse-language")||savedLanguage;}catch{}
   applyLanguage(savedLanguage);
