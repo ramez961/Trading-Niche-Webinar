@@ -527,3 +527,113 @@ html[lang="en"] .main-nav { direction: ltr; }
   .closing-cta::before { top: 50%; inset-inline-start: -155px; }
   .subpage-main::before { width: 300px; top: -185px; inset-inline-start: -175px; }
 }
+
+
+/* Refined orbital accents: varied scale and placement keep the rings atmospheric. */
+.vsl-section::before,
+.section-light::before,
+.closing-cta::before,
+.subpage-main::before {
+  box-shadow:
+    0 0 0 22px color-mix(in srgb, var(--lime) 2.2%, transparent),
+    0 0 0 50px color-mix(in srgb, var(--lime) 1.4%, transparent);
+}
+.vsl-section::before {
+  top: 50%;
+  inset-inline-start: auto;
+  inset-inline-end: -150px;
+  width: 285px;
+  transform: translateY(-50%);
+  opacity: .5;
+}
+.section-light::before {
+  top: -190px;
+  inset-inline-start: auto;
+  inset-inline-end: -170px;
+  width: 320px;
+  opacity: .46;
+}
+#journey::before {
+  top: auto;
+  inset-inline-start: -180px;
+  inset-inline-end: auto;
+  bottom: -195px;
+  width: 335px;
+  transform: none;
+  opacity: .44;
+}
+#faq::before {
+  top: 50%;
+  inset-inline-start: auto;
+  inset-inline-end: -170px;
+  bottom: auto;
+  width: 295px;
+  transform: translateY(-50%);
+  opacity: .4;
+}
+.closing-cta::before {
+  top: 50%;
+  inset-inline-start: -150px;
+  inset-inline-end: auto;
+  width: 265px;
+  transform: translateY(-50%);
+  opacity: .4;
+}
+.subpage-main::before {
+  top: 50%;
+  inset-inline-start: auto;
+  inset-inline-end: -205px;
+  width: 330px;
+  transform: translateY(-50%);
+  opacity: .48;
+}
+@media (max-width: 680px) {
+  .vsl-section::before {
+    top: 42%;
+    inset-inline-start: auto;
+    inset-inline-end: -118px;
+    width: 220px;
+    transform: translateY(-50%);
+    opacity: .42;
+  }
+  .section-light::before {
+    top: -142px;
+    inset-inline-start: auto;
+    inset-inline-end: -120px;
+    width: 245px;
+    opacity: .38;
+  }
+  #journey::before {
+    top: auto;
+    inset-inline-start: -132px;
+    inset-inline-end: auto;
+    bottom: -145px;
+    width: 255px;
+    transform: none;
+    opacity: .38;
+  }
+  #faq::before {
+    top: auto;
+    inset-inline-start: auto;
+    inset-inline-end: -128px;
+    bottom: -145px;
+    width: 245px;
+    transform: none;
+    opacity: .35;
+  }
+  .closing-cta::before {
+    top: 50%;
+    inset-inline-start: -118px;
+    width: 220px;
+    transform: translateY(-50%);
+    opacity: .36;
+  }
+  .subpage-main::before {
+    top: 50%;
+    inset-inline-start: auto;
+    inset-inline-end: -150px;
+    width: 245px;
+    transform: translateY(-50%);
+    opacity: .38;
+  }
+}
