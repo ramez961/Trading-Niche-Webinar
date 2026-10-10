@@ -479,7 +479,7 @@ html[lang="en"] .main-nav { direction: ltr; }
 .vsl-section::before, .section-light::before, .closing-cta::before, .subpage-main::before {
   content: "";
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   top: -215px;
   inset-inline-start: -185px;
   width: 360px;
