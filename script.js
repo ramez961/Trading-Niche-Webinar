@@ -430,7 +430,11 @@
     document.title = currentLanguage === "en" ? translateArabic(originalDocumentTitle) : originalDocumentTitle;
     const walker = document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
     let node;
-    while((node=walker.nextNode())) {\n      if(!originalTextNodes.has(node)) originalTextNodes.set(node,node.nodeValue);\n      const original=originalTextNodes.get(node);\n      node.nodeValue=currentLanguage==="en"?translateArabic(original):original;\n    }
+    while((node=walker.nextNode())) {
+      if(!originalTextNodes.has(node)) originalTextNodes.set(node,node.nodeValue);
+      const original=originalTextNodes.get(node);
+      node.nodeValue=currentLanguage==="en"?translateArabic(original):original;
+    }
     document.querySelectorAll("[aria-label], [title]").forEach((el)=>{
       let originals=originalAttributes.get(el);if(!originals){originals={};originalAttributes.set(el,originals);}
       ["aria-label","title"].forEach((a)=>{const v=el.getAttribute(a);if(v&&!Object.hasOwn(originals,a))originals[a]=v;if(originals[a])el.setAttribute(a,currentLanguage==="en"?translateArabic(originals[a]):originals[a]);});
