@@ -382,3 +382,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .subpage-header .header-inner { gap: 8px; }
 }
 
+
+/* Palette main color for the confirmation label */
+.subpage-card .eyebrow-main { color: var(--lime); }
