@@ -5,7 +5,7 @@ window.WEBINAR_CONFIG = {
   timeZone: "Asia/Riyadh",
   presenterName: "فريق Northouse",
   // Paste the approved YouTube watch, youtu.be, or Shorts URL here when ready.
-  vslVideoUrl: "",
+  vslVideoUrl: "https://youtu.be/dQw4w9WgXcQ",
   // Configure matching hidden GHL fields and query keys for the four UTM parameters.
   registrationEmbedUrl: "",
   applicationEmbedUrl: "",
