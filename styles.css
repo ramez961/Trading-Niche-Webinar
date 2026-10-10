@@ -472,3 +472,58 @@ html[lang="en"] .main-nav { direction: ltr; }
   .hero-grid, .hero::before, .market-console::before { display: none; }
   .market-console { box-shadow: none; }
 }
+
+
+/* Subtle orbital motif carried through the landing and follow-up pages */
+.vsl-section, .section-light, .closing-cta, .subpage-main { position: relative; isolation: isolate; }
+.vsl-section::before, .section-light::before, .closing-cta::before, .subpage-main::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -215px;
+  inset-inline-start: -185px;
+  width: 360px;
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--lime-dark) 18%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 30px color-mix(in srgb, var(--lime) 3%, transparent),
+    0 0 0 68px color-mix(in srgb, var(--lime) 2%, transparent);
+  pointer-events: none;
+}
+#journey::before {
+  top: auto;
+  inset-inline-start: auto;
+  inset-inline-end: -205px;
+  bottom: -215px;
+  opacity: .72;
+}
+#faq::before { opacity: .66; }
+.closing-cta::before {
+  top: 50%;
+  inset-inline-start: -205px;
+  transform: translateY(-50%);
+  opacity: .72;
+}
+.subpage-main::before {
+  top: -235px;
+  inset-inline-start: -205px;
+  width: 400px;
+}
+.subpage-main > .container, .vsl-section > .container, .section-light > .container, .closing-cta > .container {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 680px) {
+  .vsl-section::before, .section-light::before, .closing-cta::before, .subpage-main::before {
+    width: 270px;
+    top: -175px;
+    inset-inline-start: -155px;
+    box-shadow:
+      0 0 0 22px color-mix(in srgb, var(--lime) 2.5%, transparent),
+      0 0 0 48px color-mix(in srgb, var(--lime) 1.5%, transparent);
+  }
+  #journey::before { top: auto; inset-inline-start: auto; inset-inline-end: -165px; bottom: -175px; }
+  .closing-cta::before { top: 50%; inset-inline-start: -155px; }
+  .subpage-main::before { width: 300px; top: -185px; inset-inline-start: -175px; }
+}
