@@ -405,7 +405,13 @@
     "جلسة تعريفية مباشرة لصناع المحتوى والخبراء في مجال التداول في السعودية. تعرّف على نموذج شراكة Northouse والخطوات التالية.": "A live introductory webinar for content creators and experts in trading in Saudi Arabia. Learn about Northouse’s partnership model and next steps.",
     "تعرّف على نموذج الشراكة والخطوة التالية المناسبة لخبرتك وجمهورك.": "Learn about the partnership model and the next step that fits your experience and audience.",
     "تصميم توضيحي لحركة السوق وخطوات بناء شراكة": "Illustration of market movement and partnership-building steps",
-    "رسم توضيحي لحركة السوق": "Illustrative market chart"
+    "رسم توضيحي لحركة السوق": "Illustrative market chart",
+    "اسأل مساعد الذكاء الاصطناعي": "Ask the AI assistant",
+    "مساعد Northouse": "Northouse assistant",
+    "إغلاق": "Close",
+    "لم يتم ربط مساعد الذكاء الاصطناعي بعد.": "The AI assistant is not connected yet.",
+    "اضغط بدء المحادثة لفتح المساعد.": "Select Start chat to open the assistant.",
+    "ابدأ المحادثة": "Start chat"
 };
   const englishToArabic = Object.fromEntries(Object.entries(translations).map(([ar,en])=>[en,ar]));
   const languageToggle = document.querySelector("[data-language-toggle]");
@@ -429,6 +435,32 @@
     if(languageToggle){languageToggle.textContent=currentLanguage==="en"?"AR":"EN";languageToggle.setAttribute("aria-label",currentLanguage==="en"?"Switch to Arabic":"Switch to English");}
     try{localStorage.setItem("northouse-language",currentLanguage);}catch{}
   };
+  const aiChatToggle = document.querySelector("[data-ai-chat-toggle]");
+  const aiChatPanel = document.querySelector("#ai-chat-panel");
+  const aiChatClose = document.querySelector("[data-ai-chat-close]");
+  const aiChatStatus = document.querySelector("[data-ai-chat-status]");
+  const aiChatLink = document.querySelector("[data-ai-chat-link]");
+  try {
+    const assistantUrl = new URL(config.aiAssistantUrl || "");
+    if (assistantUrl.protocol === "https:" && aiChatLink) {
+      aiChatLink.href = assistantUrl.href;
+      aiChatLink.hidden = false;
+      if (aiChatStatus) aiChatStatus.textContent = "اضغط بدء المحادثة لفتح المساعد.";
+    }
+  } catch {}
+  const closeAiChat = () => {
+    if (aiChatPanel) aiChatPanel.hidden = true;
+    if (aiChatToggle) aiChatToggle.setAttribute("aria-expanded", "false");
+  };
+  if (aiChatToggle && aiChatPanel) {
+    aiChatToggle.addEventListener("click", () => {
+      aiChatPanel.hidden = !aiChatPanel.hidden;
+      aiChatToggle.setAttribute("aria-expanded", String(!aiChatPanel.hidden));
+    });
+    if (aiChatClose) aiChatClose.addEventListener("click", closeAiChat);
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeAiChat(); });
+  }
+
   let savedLanguage="ar";try{savedLanguage=localStorage.getItem("northouse-language")||savedLanguage;}catch{}
   applyLanguage(savedLanguage);
   if(languageToggle)languageToggle.addEventListener("click",()=>applyLanguage(currentLanguage==="ar"?"en":"ar"));
