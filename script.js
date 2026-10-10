@@ -201,7 +201,7 @@
   const themeColor = document.querySelector('meta[name="theme-color"]');
 
   const applyPalette = (name) => {
-    const palette = paletteKeys.has(name) ? name : "snowfall";
+    const palette = paletteKeys.has(name) ? name : "graphite";
     document.documentElement.dataset.palette = palette;
     paletteChoices.forEach((choice) => {
       choice.setAttribute("aria-pressed", String(choice.dataset.paletteChoice === palette));
@@ -217,13 +217,13 @@
       })[palette];
     }
     try {
-      localStorage.setItem("northouse-palette", palette);
+      localStorage.setItem("northouse-palette-v2", palette);
     } catch {}
   };
 
-  let savedPalette = "snowfall";
+  let savedPalette = "graphite";
   try {
-    savedPalette = localStorage.getItem("northouse-palette") || savedPalette;
+    savedPalette = localStorage.getItem("northouse-palette-v2") || savedPalette;
   } catch {}
   applyPalette(savedPalette);
 
