@@ -1,6 +1,12 @@
 # GoHighLevel handoff
 
-The seven pages use Graphite Gold only. Color/page review controls are removed; Arabic/English switching and the registration/application placeholders remain. Configure the approved services before launch. These exports have not been installed or tested inside the Northouse GHL account.
+The seven pages use Graphite Gold only. Color/page review controls are removed; Arabic/English switching and the registration/application placeholders remain. Configure the approved services before launch. The registration page has been installed in Northouse; refreshed exports must be pasted into GHL to apply changes.
+
+## One-file copy and paste
+
+Use `ready-to-paste/index.html` for the Webinar Registration page. Copy the entire raw file and replace all contents of the existing GHL Custom Code element. Save the code, save the page, and preview desktop and mobile. Each matching page in `ready-to-paste/` includes fonts, styles, markup, configuration, and scripts; do not add the split fragments again.
+
+The registration form URL is configured for `x7oawlbrz7IRlGZlETH4`, with a minimum iframe height of 502 pixels. Check the mobile form for clipping and verify submission and the Thank You redirect in GHL. This update does not configure form styling, redirects, or workflows.
 
 ## GHL Funnels or Websites
 
@@ -42,7 +48,7 @@ Edit `window.WEBINAR_CONFIG` in `builder/footer.html` for the builder route, or 
 - `aiAssistantUrl`: real HTTPS chat destination. Blank hides the assistant. This is a link launcher, not an AI backend or a native GHL chat-widget installation.
 - `privacyEmail`: approved privacy contact.
 
-The form placeholders are intentionally inactive; this code does not collect or store submissions. Jawad and Mehyeddin should create and publish the actual forms, field mappings, consent, redirects, pipelines, and workflows inside Northouse. Add hidden GHL fields for `utm_source`, `utm_campaign`, `utm_content`, and `utm_term` and map them to the forwarded query parameters. Verify a test submission reaches the intended contact and workflow.
+The registration slot now embeds the configured GHL form; the application slot remains a placeholder. GHL handles submissions; this page code does not collect or store them. Jawad and Mehyeddin should create and publish the actual forms, field mappings, consent, redirects, pipelines, and workflows inside Northouse. Add hidden GHL fields for `utm_source`, `utm_campaign`, `utm_content`, and `utm_term` and map them to the forwarded query parameters. Verify a test submission reaches the intended contact and workflow.
 
 Images use absolute GitHub Pages asset URLs. Keep the GitHub Pages site enabled until these URLs are replaced with final GHL Media Library or CDN URLs.
 

@@ -52,7 +52,16 @@ def build():
   else initialize();
 })();'''.replace('SCRIPT', script)
     (BUILDER/'footer.html').write_text('<script>\n'+config+'\n</script>\n<script>\n'+init+'\n</script>\n',encoding='utf-8')
-    print('Generated seven standalone pages and seven builder fragments.')
+    # Single snippets for a GHL Custom Code element: fonts, CSS, body, and scripts.
+    ready = OUT / 'ready-to-paste'
+    ready.mkdir(parents=True, exist_ok=True)
+    for name in ROUTES:
+        snippet = ((BUILDER/'head.html').read_text(encoding='utf-8')
+                   + '<style>\n'+css+'\n</style>\n'
+                   + (BUILDER/name).read_text(encoding='utf-8')+'\n'
+                   + (BUILDER/'footer.html').read_text(encoding='utf-8'))
+        (ready/name).write_text(snippet, encoding='utf-8')
+    print('Generated seven standalone pages, builder fragments, and ready-to-paste snippets.')
 
 if __name__ == '__main__':
     build()
