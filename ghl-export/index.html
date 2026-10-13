@@ -349,7 +349,7 @@ html[lang="en"] .main-nav { direction: ltr; }
 @media (max-width: 680px) {
 .header-tools { gap: 5px; }
 .language-toggle { min-height: 40px; min-width: 38px; padding-inline: 7px; font-size: 10px; }
-.site-header .header-inner > .button { display: none; }
+.site-header .header-tools > .button { display: none; }
 }
 .ai-chat-widget { position: fixed; z-index: 40; right: 22px; bottom: 22px; display: grid; justify-items: end; gap: 10px; direction: inherit; }
 .ai-chat-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 50px; padding: 0 18px; border: 1px solid color-mix(in srgb, var(--lime) 42%, var(--line)); border-radius: 999px; background: var(--forest); color: var(--white); box-shadow: 0 8px 24px rgba(0,0,0,.17); font-size: 13px; font-weight: 700; cursor: pointer; animation: ai-assistant-enter .58s cubic-bezier(.2,.75,.25,1) .25s both; transition: border-color .18s, box-shadow .18s, background .18s; }
@@ -382,7 +382,7 @@ html[lang="en"] .main-nav { direction: ltr; }
 }
 @media (min-width: 681px) and (max-width: 760px) {
 .site-header .header-inner { min-height: 70px; gap: 12px; }
-.site-header .main-nav, .site-header .header-inner > .button { display: none; }
+.site-header .main-nav, .site-header .header-tools > .button { display: none; }
 .header-tools { gap: 6px; }
 .hero { padding-top: 108px; }
 .hero-layout { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: 8px; padding-block: 38px 30px; }
@@ -395,7 +395,7 @@ html[lang="en"] .main-nav { direction: ltr; }
 .subpage-main { padding-block: 52px; }
 }
 @media (max-width: 900px) {
-.site-header .main-nav, .site-header .header-inner > .button { display: none; }
+.site-header .main-nav, .site-header .header-tools > .button { display: none; }
 }
 @media (max-width: 360px) {
 .site-header .header-inner, .subpage-header .header-inner { gap: 6px; }
@@ -833,6 +833,8 @@ html[lang="en"] .main-nav { direction: ltr; }
   .registration-facts strong { text-align: end; }
 }
 
+.site-header .header-tools { gap: 12px; }
+
 </style>
   
   
@@ -851,8 +853,9 @@ html[lang="en"] .main-nav { direction: ltr; }
         <a href="#faq">الأسئلة</a>
       </nav>
       <div class="header-tools">
-      <button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button></div>
-      <a class="button button-small button-outline" href="#register">سجّل اهتمامك <span aria-hidden="true">↙</span></a>
+        <button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button>
+        <a class="button button-small button-outline" href="#register">سجّل اهتمامك <span aria-hidden="true">↙</span></a>
+      </div>
     </div>
   </header>
 
