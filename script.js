@@ -400,6 +400,7 @@
   const originalTextNodes = new WeakMap();
   const originalAttributes = new WeakMap();
   const originalDocumentTitle = document.title;
+  const languageRoot = document.querySelector("#main-content")?.closest(".custom-code-container") || document.body;
   let currentLanguage = "ar";
   const translateArabic = (value) => {
     const trimmed = value.trim();
@@ -410,6 +411,13 @@
     currentLanguage = language === "en" ? "en" : "ar";
     document.documentElement.lang = currentLanguage;
     document.documentElement.dir = currentLanguage === "en" ? "ltr" : "rtl";
+    // GHL can overwrite the outer document language after hydration.
+    // Keep the embedded page's font and direction tied to its own switch.
+    languageRoot.dataset.webinarLanguage = currentLanguage;
+    languageRoot.dir = currentLanguage === "en" ? "ltr" : "rtl";
+    languageRoot.style.setProperty("--font", currentLanguage === "en"
+      ? '"Manrope", Arial, sans-serif'
+      : '"Tajawal", Tahoma, Arial, sans-serif');
     document.title = currentLanguage === "en" ? translateArabic(originalDocumentTitle) : originalDocumentTitle;
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
       acceptNode(node) {

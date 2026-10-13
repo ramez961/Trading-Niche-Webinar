@@ -817,3 +817,11 @@ html[lang="en"] .main-nav { direction: ltr; }
 }
 
 .site-header .header-tools { gap: 12px; }
+
+/* Keep imported typography independent of GHL's document language. */
+.custom-code-container {
+  --font: "Tajawal", Tahoma, Arial, sans-serif;
+  font-family: var(--font);
+}
+#main-content, .site-header, .subpage-header, .site-footer,
+.mobile-sticky-cta, .ai-chat-widget { font-family: var(--font); }
