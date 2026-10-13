@@ -126,6 +126,10 @@
     frame.title = title;
     frame.src = url.href;
     frame.loading = "lazy";
+    const configuredHeight = Number(config[slotName + "EmbedHeight"]);
+    if (Number.isFinite(configuredHeight) && configuredHeight >= 300 && configuredHeight <= 3000) {
+      frame.style.minHeight = configuredHeight + "px";
+    }
     frame.referrerPolicy = "strict-origin-when-cross-origin";
     frame.allow = "clipboard-write";
     slot.replaceChildren(frame);
@@ -148,7 +152,15 @@
       });
       return;
     }
-    if (url.protocol !== "https:") return;
+    if (url.protocol !== "https:") {
+      links.forEach((link) => {
+        link.removeAttribute("href");
+        link.setAttribute("aria-disabled", "true");
+        link.classList.add("pending-link");
+        link.textContent = label;
+      });
+      return;
+    }
     links.forEach((link) => {
       link.href = url.href;
       link.target = "_blank";
@@ -194,71 +206,12 @@
     updateMobileCta();
   }
 
-  const paletteKeys = new Set(["snowfall", "winter", "porcelain", "cotton", "green", "graphite"]);
-  const paletteChoices = [...document.querySelectorAll("[data-palette-choice]")];
-  const paletteToggle = document.querySelector(".theme-toggle");
-  const palettePanel = document.querySelector("#palette-options");
-  const themeColor = document.querySelector('meta[name="theme-color"]');
-
-  const applyPalette = (name) => {
-    const palette = paletteKeys.has(name) ? name : "graphite";
-    document.documentElement.dataset.palette = palette;
-    paletteChoices.forEach((choice) => {
-      choice.setAttribute("aria-pressed", String(choice.dataset.paletteChoice === palette));
-    });
-    if (themeColor) {
-      themeColor.content = ({
-        snowfall: "#101826",
-        winter: "#1E2A33",
-        porcelain: "#1B2A38",
-        cotton: "#26263A",
-        green: "#1E3025",
-        graphite: "#181B1F"
-      })[palette];
-    }
-    try {
-      localStorage.setItem("northouse-palette-v2", palette);
-    } catch {}
-  };
-
-  let savedPalette = "graphite";
-  try {
-    savedPalette = localStorage.getItem("northouse-palette-v2") || savedPalette;
-  } catch {}
-  applyPalette(savedPalette);
-
-  if (paletteToggle && palettePanel) {
-    paletteToggle.addEventListener("click", () => {
-      const open = paletteToggle.getAttribute("aria-expanded") !== "true";
-      paletteToggle.setAttribute("aria-expanded", String(open));
-      palettePanel.hidden = !open;
-    });
-    paletteChoices.forEach((choice) => {
-      choice.addEventListener("click", () => applyPalette(choice.dataset.paletteChoice));
-    });
-    document.addEventListener("click", (event) => {
-      if (!event.target.closest(".theme-picker")) {
-        paletteToggle.setAttribute("aria-expanded", "false");
-        palettePanel.hidden = true;
-      }
-    });
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        paletteToggle.setAttribute("aria-expanded", "false");
-        palettePanel.hidden = true;
-        paletteToggle.focus();
-      }
-    });
-  }
-
   const translations = {
+  "انتقل إلى المحتوى": "Skip to content",
   "جلسة Northouse لصناع وخبراء التداول": "Northouse Webinar for Trading Creators and Experts",
   "عن الجلسة": "About the webinar",
   "لمن الجلسة؟": "Who is it for?",
   "الأسئلة": "FAQs",
-  "جرّب الألوان": "Try the colors",
-  "اختر لوحة الألوان للمعاينة": "Choose a palette to preview",
-  "الصفحات": "Pages",
   "تأكيد التسجيل": "Registration confirmation",
   "طلب الشراكة": "Partnership application",
   "حجز محادثة": "Book a conversation",
@@ -428,7 +381,6 @@
   "الفيديو التعريفي لجلسة Northouse": "Northouse webinar introduction video",
   "نموذج التسجيل في الجلسة": "Webinar registration form",
   "نموذج طلب الشراكة": "Partnership application form",
-  "صفحات الموقع": "Site pages",
   "التنقل الرئيسي": "Main navigation",
   "Northouse — الرئيسية": "Northouse — Home",
     "جلسة تعريفية مباشرة لصناع المحتوى والخبراء في مجال التداول في السعودية. تعرّف على نموذج شراكة Northouse والخطوات التالية.": "A live introductory webinar for content creators and experts in trading in Saudi Arabia. Learn about Northouse’s partnership model and next steps.",
@@ -459,7 +411,12 @@
     document.documentElement.lang = currentLanguage;
     document.documentElement.dir = currentLanguage === "en" ? "ltr" : "rtl";
     document.title = currentLanguage === "en" ? translateArabic(originalDocumentTitle) : originalDocumentTitle;
-    const walker = document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.parentElement?.closest("script, style, noscript")
+          ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+      }
+    });
     let node;
     while((node=walker.nextNode())) {
       if(!originalTextNodes.has(node)) originalTextNodes.set(node,node.nodeValue);
@@ -491,6 +448,7 @@
     if (assistantUrl.protocol === "https:" && aiChatLink) {
       aiChatLink.href = assistantUrl.href;
       aiChatLink.hidden = false;
+      if (aiChatWidget) aiChatWidget.hidden = false;
       if (aiChatStatus) aiChatStatus.textContent = "اضغط بدء المحادثة لفتح المساعد.";
     }
   } catch {}
@@ -535,3 +493,4 @@
   applyLanguage(savedLanguage);
   if(languageToggle)languageToggle.addEventListener("click",()=>applyLanguage(currentLanguage==="ar"?"en":"ar"));
 })();
+

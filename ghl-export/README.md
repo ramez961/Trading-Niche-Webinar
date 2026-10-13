@@ -1,14 +1,22 @@
 # GoHighLevel handoff
 
-This folder contains seven standalone Northouse webinar pages. Each HTML file already includes the page markup, shared CSS, language/theme behavior, UTM capture, and shared JavaScript. Images and the favicon use public absolute URLs, so there are no relative asset folders to copy.
+The seven pages use Graphite Gold only. Color/page review controls are removed; Arabic/English switching and the registration/application placeholders remain. Configure the approved services before launch. These exports have not been installed or tested inside the Northouse GHL account.
 
-## Recommended install: GHL Custom HTML Pages
+## GHL Funnels or Websites
 
-These full-document files are intended for **Sites → WordPress → Manage Website → Pages → Upload New HTML Page** in a HighLevel account with WordPress Hosting enabled. Upload one HTML file per page, then set the page URL paths to match the route list below. HighLevel currently documents a 5 MB maximum per uploaded page; every file here is well below that limit.
+Use the files in `builder/` in the Northouse sub-account:
 
-| File | Set this URL path |
+1. Create blank pages with the routes below.
+2. Add a full-width section and one-column row with zero padding and margins.
+3. Paste the matching `builder/*.html` body fragment into a Code element.
+4. Paste `builder/shared.css` into the page Custom CSS area, without style tags.
+5. Paste `builder/head.html` into the head tracking/custom code area.
+6. Paste `builder/footer.html` into the footer/body tracking code area. It contains configuration first, followed by the shared script, and handles GHL's `hydrationDone` event.
+7. Set page titles and descriptions in GHL's SEO settings. Test both languages and every route in the published preview.
+
+| File | Page path |
 | --- | --- |
-| `index.html` | `/` (or make it the website home page) |
+| `index.html` | `/webinar` |
 | `thanks.html` | `/thank-you` |
 | `application.html` | `/application` |
 | `booking.html` | `/booking` |
@@ -16,37 +24,28 @@ These full-document files are intended for **Sites → WordPress → Manage Webs
 | `privacy.html` | `/privacy` |
 | `terms.html` | `/terms` |
 
-Use the exact route paths above so all the navigation and calls to action stay connected. If your GHL account does not include WordPress Hosting, these full HTML documents do not belong inside a normal Custom HTML element; use GHL's page builder and place the page body, shared CSS, and JavaScript in its corresponding code areas, or enable a hosting option that accepts HTML pages.
+The body fragment is code-based, not a collection of native drag-and-drop elements. Do not paste a full standalone HTML document into a Code element. Set the registration form's successful submission redirect to the final `/thank-you` URL and the application redirect to `/booking` in GHL.
 
-## Required before launch
+## WordPress HTML uploads
 
-The layout works without configuration, but live services need the team's real URLs and event information. In **each HTML file**, search near the bottom for `window.WEBINAR_CONFIG = {` and fill in the same values:
+If the team already uses GHL WordPress Hosting, the top-level HTML files in this directory include inline styles and scripts. Use Sites → WordPress → Manage Website → Pages → Upload New HTML Page. Upload each file separately and use the same paths. Update by uploading a new version; GitHub pushes do not automatically update GHL.
 
-- `eventDateLabel`: approved date/time displayed on the page.
-- `eventStartISO`: start time in ISO 8601 format, including the correct offset, if the countdown should run.
-- `vslVideoUrl`: approved YouTube URL.
-- `registrationEmbedUrl`: published GHL registration form URL.
-- `applicationEmbedUrl`: published GHL application form URL.
-- `bookingUrl`: published GHL calendar/booking URL.
-- `paymentUrl`: approved checkout/payment URL.
-- `aiAssistantUrl`: the actual assistant/chat URL, if one is set up. The page currently shows the assistant interface but cannot answer messages by itself.
-- `privacyEmail`: contact email for the privacy page.
+## Configuration and forms
 
-The registration form must be created and published in GHL. Add hidden fields named exactly `utm_source`, `utm_campaign`, `utm_content`, and `utm_term` to that form and map them to the corresponding query parameters. The page preserves these values and appends them to the form URL. A hidden HTML field by itself does not save a lead; the form needs to contain and store each field in GHL.
+Edit `window.WEBINAR_CONFIG` in `builder/footer.html` for the builder route, or in each standalone page for WordPress uploads:
 
-The booking calendar and payment provider must also be created in GHL (or an approved provider) and their URLs added above. The original video cover and Northouse mark are served from this public repository's GitHub Pages asset URLs; keep the repository's Pages site enabled or replace those two absolute URLs with the final production asset URLs.
+- `eventDateLabel`, `eventStartISO`, `timeZone`: approved event details.
+- `vslVideoUrl`: approved HTTPS YouTube URL; blank keeps the video placeholder.
+- `registrationEmbedUrl`, `applicationEmbedUrl`: published GHL form URLs from the generated iframe `src`, not a login/dashboard link or the entire embed code.
+- `registrationEmbedHeight`, `applicationEmbedHeight`: optional iframe height from 300 to 3000 pixels; 0 uses the responsive defaults. Check the longest mobile form for clipping.
+- `bookingUrl`, `paymentUrl`: approved HTTPS calendar and checkout destinations.
+- `aiAssistantUrl`: real HTTPS chat destination. Blank hides the assistant. This is a link launcher, not an AI backend or a native GHL chat-widget installation.
+- `privacyEmail`: approved privacy contact.
 
-## Builder distinction
+The form placeholders are intentionally inactive; this code does not collect or store submissions. Jawad and Mehyeddin should create and publish the actual forms, field mappings, consent, redirects, pipelines, and workflows inside Northouse. Add hidden GHL fields for `utm_source`, `utm_campaign`, `utm_content`, and `utm_term` and map them to the forwarded query parameters. Verify a test submission reaches the intended contact and workflow.
 
-HighLevel supports uploaded standalone HTML pages on its WordPress hosting product. A regular GHL Funnel/Website builder page is assembled with GHL's visual editor and code elements; pasting an entire `<!doctype html>` document into one code element is not the same installation method. The export is designed for the documented upload route and includes full files for the team to inspect or adapt.
+Images use absolute GitHub Pages asset URLs. Keep the GitHub Pages site enabled until these URLs are replaced with final GHL Media Library or CDN URLs.
 
-## Included behavior
+## Regenerate after changes
 
-- Arabic and English page content and direction toggle.
-- Responsive page layout and palette selector.
-- UTM query capture and forwarding to the registration form URL.
-- YouTube VSL player setup when a video URL is supplied.
-- Form, booking, and payment destinations when their published URLs are supplied.
-- Shared internal navigation using the route paths above.
-
-No GHL account was connected for this preparation, so these files have not been uploaded or validated in a live sub-account. The forms, calendar, checkout, video, privacy contact, and AI assistant remain the only account-specific values to provide.
+Run `python tools/build_ghl_export.py` from the repository. Update source files first, regenerate exports, then paste or upload the refreshed versions into GHL. The export is reproducible and does not require private credentials.

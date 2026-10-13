@@ -11,9 +11,9 @@ The webinar is an introductory conversation about a potential partnership. It is
 - Register their interest once the registration form is connected.
 - Read the privacy policy and terms.
 - Switch between Arabic and English.
-- Browse the available page designs and color palettes using the review controls.
+- Use the finalized Graphite Gold design across every page.
 
-The floating Northouse AI assistant button is currently a setup placeholder. It can open a chat link after an approved assistant service is configured.
+The optional Northouse assistant stays hidden until a real HTTPS chat destination is configured in `aiAssistantUrl`. It opens that service; the website does not generate AI replies itself.
 
 ## Pages and visitor journey
 
@@ -50,3 +50,8 @@ The site avoids fabricated countdowns, scarcity, testimonials, outcomes, and inv
 ## Publishing
 
 A GitHub Actions workflow in `.github/workflows/deploy.yml` publishes the site when changes are pushed to `main`. GitHub Pages must be configured to use **GitHub Actions** as its build and deployment source.
+
+
+## GHL handoff
+
+`ghl-export/` contains standalone HTML uploads. `ghl-export/builder/` contains HTML body fragments, shared CSS, head font links, and footer scripts for GHL Funnels/Website code areas. Rebuild both exports with `python tools/build_ghl_export.py` after changing source files. Forms stay as inactive placeholders until approved GHL embed URLs are added to `config.js`; no demo form submits or stores visitor data.
